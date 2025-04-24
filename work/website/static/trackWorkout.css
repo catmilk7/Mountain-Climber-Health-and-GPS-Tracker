@@ -1,0 +1,565 @@
+.workout-interface {
+    background-color: #edeae1;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+  
+    .workout-interface .div {
+        background-color: #edeae1;
+        width: 1440px;
+        height: 961px;
+        position: relative;
+    }
+  
+    .workout-interface .welcome {
+        position: absolute;
+        width: 450px;
+        height: 25px;
+        top: 84px;
+        left: 42px;
+    }
+  
+    .workout-interface .text-wrapper {
+        position: absolute;
+        top: -1px;
+        left: 0;
+        font-family: "Quicksand-Regular", Helvetica;
+        font-weight: 400;
+        color: #000000;
+        font-size: 20px;
+        text-align: center;
+        letter-spacing: 0;
+        line-height: normal;
+    }
+  
+    .workout-interface .text-wrapper-2 {
+        position: absolute;
+        top: -1px;
+        left: 171px;
+        font-family: "Quicksand-Regular", Helvetica;
+        font-weight: 400;
+        color: #000000;
+        font-size: 20px;
+        text-align: center;
+        letter-spacing: 0;
+        line-height: normal;
+    }
+  
+    .workout-interface .back {
+        position: absolute;
+        width: 327px;
+        height: 53px;
+        top: 189px;
+        left: 42px;
+        background-color: #ad9b4e;
+        border-radius: 24px;
+    }
+  
+  
+    .workout-interface .text-wrapper-3 {
+        position: absolute;
+        width: 179px;
+        top: 13px;
+        left: 74px;
+        font-family: "Quicksand-Regular", Helvetica;
+        font-weight: 400;
+        color: #000000;
+        font-size: 20px;
+        text-align: center;
+        letter-spacing: 0;
+        line-height: normal;
+    }
+  
+    .workout-interface .reset-workout {
+        position: absolute;
+        width: 337px;
+        height: 53px;
+        top: 189px;
+        left: 401px;
+        background-color: #e2d412;
+        border-radius: 24px;
+    }
+  
+    .workout-interface .text-wrapper-4 {
+        position: absolute;
+        width: 145px;
+        top: 13px;
+        left: 96px;
+        font-family: "Quicksand-Regular", Helvetica;
+        font-weight: 400;
+        color: #000000;
+        font-size: 20px;
+        text-align: center;
+        letter-spacing: 0;
+        line-height: normal;
+    }
+  
+    .workout-interface .current-date-time {
+        position: absolute;
+        width: 647px;
+        height: 55px;
+        top: 115px;
+        left: 40px;
+    }
+  
+    .workout-interface .day-in-week {
+        position: absolute;
+        top: -1px;
+        left: 0;
+        font-family: "DM Serif Display-Regular", Helvetica;
+        font-weight: 400;
+        color: #000000;
+        font-size: 40px;
+        text-align: center;
+        letter-spacing: 0;
+        line-height: normal;
+    }
+  
+    .workout-interface .date {
+        position: absolute;
+        top: -1px;
+        left: 153px;
+        font-family: "DM Serif Display-Regular", Helvetica;
+        font-weight: 400;
+        color: #000000;
+        font-size: 40px;
+        text-align: center;
+        letter-spacing: 0;
+        line-height: normal;
+    }
+  
+    .workout-interface .time {
+        position: absolute;
+        top: -1px;
+        left: 354px;
+        font-family: "DM Serif Display-Regular", Helvetica;
+        font-weight: 400;
+        color: #000000;
+        font-size: 40px;
+        text-align: center;
+        letter-spacing: 0;
+        line-height: normal;
+    }
+  
+    .workout-interface .user-avatar {
+        position: absolute;
+        width: 97px;
+        height: 99px;
+        top: 35px;
+        left: 1302px;
+        background-color: #ffffff;
+        border-radius: 48.5px / 49.5px;
+    }
+  
+    .workout-interface .user {
+        position: absolute;
+        width: 67px;
+        height: 67px;
+        top: 13px;
+        left: 15px;
+        object-fit: cover;
+    }
+  
+    .workout-interface .map {
+        position: absolute;
+        width: 631px;
+        height: 714px;
+        top: 189px;
+        left: 768px;
+        background-color: #ffffff;
+        border-radius: 30px;
+        background-size: cover;
+        background-position: 50% 50%;
+    }
+  
+    .workout-interface .overlap-group {
+        top: 20px;
+        left: 24px;
+        position: absolute;
+        z-index: 10;
+        width: 37px;
+        height: 38px;
+        background-color: #dbd7c5;
+        border-radius: 18.5px / 19px;
+    }
+  
+    .workout-interface .itinerary {
+        position: absolute;
+        width: 27px;
+        height: 27px;
+        top: 6px;
+        left: 5px;
+        object-fit: cover;
+    }
+  
+    .workout-interface .text-wrapper-5 {
+        position: absolute;
+        z-index: 10;
+        top: 21px;
+        left: 75px;
+        font-family: "DM Serif Display-Regular", Helvetica;
+        font-weight: 400;
+        color: #000000;
+        font-size: 25px;
+        text-align: center;
+        letter-spacing: 0;
+        line-height: normal;
+    }
+  
+    .workout-interface .track-area {
+        position: absolute;
+        width: 331px;
+        height: 297px;
+        top: 606px;
+        left: 407px;
+        background-color: #ffffff;
+        border-radius: 30px;
+    }
+  
+    .workout-interface .overlap {
+        top: 18px;
+        left: 19px;
+        position: absolute;
+        width: 37px;
+        height: 38px;
+        background-color: #dbd7c5;
+        border-radius: 18.5px / 19px;
+    }
+  
+    .workout-interface .heart-rate {
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        top: 9px;
+        left: 7px;
+        object-fit: cover;
+    }
+  
+    .workout-interface .text-wrapper-6 {
+        position: absolute;
+        top: 19px;
+        left: 71px;
+        font-family: "DM Serif Display-Regular", Helvetica;
+        font-weight: 400;
+        color: #000000;
+        font-size: 25px;
+        text-align: center;
+        letter-spacing: 0;
+        line-height: normal;
+    }
+  
+    .workout-interface .button-track {
+        left: 78px;
+        background-color: #31c459;
+        position: absolute;
+        width: 175px;
+        height: 175px;
+        top: 79px;
+        border-radius: 87.5px;
+    }
+  
+    .workout-interface .text-wrapper-7 {
+        position: absolute;
+        width: 123px;
+        top: 66px;
+        left: 26px;
+        font-family: "Quicksand-Bold", Helvetica;
+        font-weight: 700;
+        color: #edeae1;
+        font-size: 30px;
+        text-align: center;
+        letter-spacing: 0;
+        line-height: normal;
+    }
+  
+    .workout-interface .emergency-area {
+        position: absolute;
+        width: 329px;
+        height: 297px;
+        top: 606px;
+        left: 40px;
+        background-color: #ffffff;
+        border-radius: 30px;
+    }
+  
+    .workout-interface .thermometer-wrapper {
+        top: 18px;
+        left: 17px;
+        position: absolute;
+        width: 37px;
+        height: 38px;
+        background-color: #dbd7c5;
+        border-radius: 18.5px / 19px;
+    }
+  
+    .workout-interface .thermometer {
+        position: absolute;
+        width: 25px;
+        height: 25px;
+        top: 6px;
+        left: 6px;
+        object-fit: cover;
+    }
+  
+    .workout-interface .text-wrapper-8 {
+        position: absolute;
+        top: 19px;
+        left: 69px;
+        font-family: "DM Serif Display-Regular", Helvetica;
+        font-weight: 400;
+        color: #000000;
+        font-size: 25px;
+        text-align: center;
+        letter-spacing: 0;
+        line-height: normal;
+    }
+  
+    .workout-interface .button-SOS {
+        left: 77px;
+        background-color: #e15a5a;
+        position: absolute;
+        width: 175px;
+        height: 175px;
+        top: 79px;
+        border-radius: 87.5px;
+    }
+  
+    .workout-interface .summary-workout {
+        position: absolute;
+        width: 698px;
+        height: 319px;
+        top: 264px;
+        left: 40px;
+        background-color: #ffffff;
+        border-radius: 30px;
+    }
+  
+    .workout-interface .speed {
+        position: absolute;
+        width: 617px;
+        height: 45px;
+        top: 233px;
+        left: 34px;
+    }
+  
+    .workout-interface .unit-speed {
+        width: 118px;
+        left: 499px;
+        position: absolute;
+        top: -1px;
+        font-family: "Quicksand-Bold", Helvetica;
+        font-weight: 700;
+        color: #000000;
+        font-size: 30px;
+        letter-spacing: 0;
+        line-height: normal;
+    }
+  
+    .workout-interface .track-speed {
+        position: absolute;
+        width: 61px;
+        top: -1px;
+        left: 427px;
+        font-family: "Quicksand-Bold", Helvetica;
+        font-weight: 700;
+        color: #000000;
+        font-size: 30px;
+        letter-spacing: 0;
+        line-height: normal;
+    }
+  
+    .workout-interface .text-wrapper-9 {
+        position: absolute;
+        width: 138px;
+        top: -1px;
+        left: 0;
+        font-family: "Quicksand-Bold", Helvetica;
+        font-weight: 700;
+        color: #000000;
+        font-size: 30px;
+        letter-spacing: 0;
+        line-height: normal;
+    }
+  
+    .workout-interface .gym-wrapper {
+        top: 11px;
+        left: 15px;
+        position: absolute;
+        width: 37px;
+        height: 38px;
+        background-color: #dbd7c5;
+        border-radius: 18.5px / 19px;
+    }
+  
+    .workout-interface .gym {
+        position: absolute;
+        width: 23px;
+        height: 23px;
+        top: 8px;
+        left: 7px;
+        object-fit: cover;
+    }
+  
+    .workout-interface .text-wrapper-10 {
+        position: absolute;
+        top: 15px;
+        left: 69px;
+        font-family: "DM Serif Display-Regular", Helvetica;
+        font-weight: 400;
+        color: #000000;
+        font-size: 25px;
+        text-align: center;
+        letter-spacing: 0;
+        line-height: normal;
+    }
+  
+    .workout-interface .time-2 {
+        position: absolute;
+        width: 592px;
+        height: 45px;
+        top: 83px;
+        left: 35px;
+    }
+  
+    .workout-interface .track-time {
+        position: absolute;
+        width: 81px;
+        top: -1px;
+        left: 426px;
+        font-family: "Quicksand-Bold", Helvetica;
+        font-weight: 700;
+        color: #000000;
+        font-size: 30px;
+        letter-spacing: 0;
+        line-height: normal;
+    }
+  
+    .workout-interface .pace {
+        position: absolute;
+        width: 616px;
+        height: 45px;
+        top: 183px;
+        left: 35px;
+    }
+  
+    .workout-interface .unit-pace {
+        width: 118px;
+        left: 498px;
+        position: absolute;
+        top: -1px;
+        font-family: "Quicksand-Bold", Helvetica;
+        font-weight: 700;
+        color: #000000;
+        font-size: 30px;
+        letter-spacing: 0;
+        line-height: normal;
+    }
+  
+    .workout-interface .text-wrapper-11 {
+        position: absolute;
+        width: 61px;
+        top: -1px;
+        left: 426px;
+        font-family: "Quicksand-Bold", Helvetica;
+        font-weight: 700;
+        color: #000000;
+        font-size: 30px;
+        letter-spacing: 0;
+        line-height: normal;
+    }
+  
+    .workout-interface .distance {
+        position: absolute;
+        width: 550px;
+        height: 45px;
+        top: 133px;
+        left: 35px;
+    }
+  
+    .workout-interface .unit-distance {
+        width: 52px;
+        left: 498px;
+        position: absolute;
+        top: -1px;
+        font-family: "Quicksand-Bold", Helvetica;
+        font-weight: 700;
+        color: #000000;
+        font-size: 30px;
+        letter-spacing: 0;
+        line-height: normal;
+    }
+  
+  .exit-button {
+    position: absolute;
+    width: 327px;
+    height: 53px;
+    top: 189px;
+    left: 42px;
+    background-color: #ad9b4e;
+    border: none;
+    border-radius: 24px;
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+  }
+  
+  .exit-button:hover {
+    background-color: #998a44;
+  }
+  
+  .exit-button:active {
+    transform: scale(0.96);
+  }
+  
+  
+  #map {
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    border-radius: 30px;
+    position: relative;
+  }
+  
+  .reset-workout:hover {
+    filter: brightness(1.1);
+    box-shadow: 0 2px 2px;
+  }
+  
+  .reset-workout:active {
+    transform: translateY(3px);
+    box-shadow: 0 2px 2px;
+  }
+  
+  .button-track:hover {
+    filter: brightness(1.1);
+    box-shadow: 0 2px 2px;
+  }
+  
+  .button-track:active {
+    transform: translateY(3px);
+    box-shadow: 0 2px 2px;
+  }
+  
+  .exit-button:hover {
+    filter: brightness(1.1);
+    box-shadow: 0 2px 2px;
+  }
+  
+  .exit-button:active {
+    transform: translateY(3px);
+    box-shadow: 0 2px 2px;
+  }
+  
+  .button-SOS:hover {
+    filter: brightness(1.1);
+    box-shadow: 0 2px 2px;
+  }
+  
+  .button-SOS:active {
+    transform: translateY(3px);
+    box-shadow: 0 2px 2px;
+  }

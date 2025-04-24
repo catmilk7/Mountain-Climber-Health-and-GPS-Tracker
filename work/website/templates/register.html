@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mountain Climber Safety System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='register.css')}}" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Quicksand:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+<main class="register">
+  {% include 'navbar.html' %}
+    <div class="register-container">
+      <img
+        src="{{ url_for('static', filename='img/registerBackgound.png') }}"
+        class="background-image"
+        alt="Background pattern"
+      />
+      <section class="content-wrapper">
+        <div class="content-columns">
+          <div class="form-column">
+            <div class="form-content">
+              <form method="POST">
+                <div class="form-header">
+                  <h1 class="main-title">Start your perfect trip</h1>
+                  <input type="text" id="full_name" name ="full_name" class="input-label full-name-input" placeholder="Enter full name">
+                  <input type="email" id="email" name ="email" class="input-label email-input" placeholder="Enter email">
+                  <input type="password" id="password" name ="password" class="input-label password-input" placeholder="Password">
+                  <input type="confirm_password" id="confirm_password" name ="confirm_password" class="input-label  confirm-password-input" placeholder="Comfirm password">
+                </div>
+                <button type="submit" class="start-button">Start</button>
+                <div class="login-prompt">
+                  <p class="login-text">Already have an account?</p>
+                  <a href="/login" class="login-link">Log In</a>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="image-column">
+            <img
+              src="{{ url_for('static', filename='img/registerFrontGround.png') }}"
+              class="feature-image"
+              alt="Featured destination"
+            />
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  

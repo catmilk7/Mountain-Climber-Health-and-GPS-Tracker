@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="{{url_for('static', filename='trackWorkout2.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static', filename='trackWorkout.css')}}" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />        <!-- Leaflet CSS -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>        <!-- Leaflet JS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="workout-interface">
+        <div class="div">
+
+            <div class="welcome">
+                <div class="text-wrapper">Let’s do Workout with us!</div>
+                <!-- <div class="text-wrapper-2">Registered Name</div>          Update Name with database -->
+            </div>
+
+            <button class="exit-button" onclick="window.location.href='/'">Exit Tracker</button>
+
+            <button class="reset-workout"><div class="text-wrapper-4">Reset Workout</div></button>
+
+            <div class="current-date-time">
+                <div class="day-in-week" id="day-in-week">DIW</div>
+                <div class="date" id="date">dd-mm-yy</div>
+                <div class="time" id="time">hh:mm:ss</div>
+            </div>
+
+            <div class="user-avatar"><img class="user" src="{{ url_for('static', filename='img/logo.png') }}" /></div>         <!-- Update user-avatar with database -->
+
+            <div class="map">
+                <!-- Update Map with a Map API -->
+                <div id="map" style="height: 715px;" class="rounded-4 overflow-hidden"></div>
+            </div>
+
+            <div class="track-area">
+                <div class="overlap"><img class="heart-rate" src="{{ url_for('static', filename='icon/processicon.png') }}" /></div>
+                <div class="text-wrapper-6">Track Workout</div>
+                <button class="button-track"><div class="text-wrapper-7">TRACK !</div></button>
+            </div>
+
+            <div class="emergency-area">
+                <div class="thermometer-wrapper"><img class="thermometer" src="{{ url_for('static', filename='icon/Alert.png') }}" /></div>
+                <div class="text-wrapper-8">Do you know this?</div>
+                <button id="tip-button" class="button-SOS"><div class="text-wrapper-7">Tips!</div></button>
+            </div>
+
+            <div class="summary-workout">
+                <div class="text-wrapper-10">Summary</div>
+                <div class="gym-wrapper"><img class="gym" src="{{ url_for('static', filename='icon/Dashboard.png') }}" /></div>
+                <div class="speed">
+                    <div class="text-wrapper-9">Speed</div>
+                    <div class="track-speed" id="speed">----</div>         <!-- Update Speed with API -->
+                    <div class="unit-speed">km/h</div>
+                </div>
+                <div class="time-2">
+                    <div class="text-wrapper-9">Time</div>
+                    <div class="track-time" id="timeTrack">-:--:--</div>         <!-- Update Time with API -->
+                </div>
+                <div class="pace">
+                    <div class="text-wrapper-9">Pace</div>
+                    <div class="text-wrapper-11" id="pace">--:--</div>         <!-- Update Pace with API -->
+                    <div class="unit-pace">min/km</div>
+                </div>
+                <div class="distance">
+                    <div class="text-wrapper-9">Distance</div>
+                    <div class="text-wrapper-11" id="distance">----</div>         <!-- Update Distance with API -->
+                    <div class="unit-distance">km</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function updateDateTime() {
+            const now = new Date();
+            const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+            const dayOfWeek = days[now.getDay()];
+            const day = String(now.getDate()).padStart(2, '0');
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const year = String(now.getFullYear()).slice(-2);
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+
+            document.getElementById("day-in-week").textContent = dayOfWeek;
+            document.getElementById("date").textContent = `${day}-${month}-${year}`;
+            document.getElementById("time").textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        // Update every second
+        setInterval(updateDateTime, 1000);
+        // Run once immediately
+        updateDateTime();
+    </script>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script>
+      function updateDashboard() {
+        fetch('/api/status')
+          .then(response => response.json())
+          .then(data => {
+            // Cập nhật nhiệt độ
+            document.getElementById("temperature-value").innerText = data.temperature.toFixed(2);
+
+            // Cập nhật bản đồ (chỉ nếu tọa độ thay đổi)
+            if (window.currentLat !== data.lat || window.currentLon !== data.lon) {
+              window.currentLat = data.lat;
+              window.currentLon = data.lon;
+
+              map.setView([data.lat, data.lon], 15);
+              marker.setLatLng([data.lat, data.lon]);
+            }
+          })
+          .catch(err => {
+            console.error("Lỗi khi lấy dữ liệu cập nhật:", err);
+          });
+      }
+
+      // Khởi tạo biến bản đồ toàn cục
+      let map = L.map('map').setView([{{ lat }}, {{ lon }}], 15);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+      let marker = L.marker([{{ lat }}, {{ lon }}]).addTo(map).bindPopup("User location").openPopup();
+
+      // Lưu vị trí hiện tại
+      window.currentLat = {{ lat }};
+      window.currentLon = {{ lon }};
+
+      // Gọi cập nhật mỗi 5 giây
+      setInterval(updateDashboard, 5000);
+    </script>
+
+
+    <!-- Run Tracking JS -->
+    <script>
+        let isTracking = false;
+        let watchId = null;
+        let startTime = null;
+        let totalDistance = 0;
+        let lastCoords = null;
+
+        function formatTime(ms) {
+            const totalSeconds = Math.floor(ms / 1000);
+            const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
+            const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
+            const seconds = String(totalSeconds % 60).padStart(2, '0');
+            return `${hours}:${minutes}:${seconds}`;
+        }
+
+        function calculateDistance(lat1, lon1, lat2, lon2) {
+            const toRad = x => (x * Math.PI) / 180;
+            const R = 6371e3; // Earth's radius in meters
+            const φ1 = toRad(lat1);
+            const φ2 = toRad(lat2);
+            const Δφ = toRad(lat2 - lat1);
+            const Δλ = toRad(lon2 - lon1);
+
+            const a = Math.sin(Δφ / 2) ** 2 +
+                Math.cos(φ1) * Math.cos(φ2) *
+                Math.sin(Δλ / 2) ** 2;
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            return R * c / 1000; // return in km
+        }
+
+        function updateStats() {
+            const now = Date.now();
+            const elapsed = now - startTime;
+            const timeStr = formatTime(elapsed);
+            const pace = totalDistance > 0 ? (elapsed / 60000 / totalDistance).toFixed(2) : "--:--";
+            const speed = totalDistance > 0 ? ((totalDistance / (elapsed / 3600000)).toFixed(2)) : "----";
+
+            document.getElementById("timeTrack").textContent = timeStr;
+            document.getElementById("distance").textContent = totalDistance.toFixed(2);
+            document.getElementById("pace").textContent = pace;
+            document.getElementById("speed").textContent = speed;
+        }
+
+        function startTracking() {
+            startTime = Date.now();
+            totalDistance = 0;
+            lastCoords = null;
+            watchId = setInterval(() => {
+                fetch('/api/status')
+                    .then(res => res.json())
+                    .then(data => {
+                        const { lat, lon } = data;
+                        if (lastCoords) {
+                            const dist = calculateDistance(lastCoords.lat, lastCoords.lon, lat, lon);
+                            totalDistance += dist;
+                        }
+                        lastCoords = { lat, lon };
+                        updateStats();
+                    })
+                    .catch(console.error);
+            }, 5000);
+        }
+
+        function stopTracking() {
+            clearInterval(watchId);
+            watchId = null;
+        }
+
+        document.querySelector(".button-track").addEventListener("click", () => {
+            isTracking = !isTracking;
+            if (isTracking) {
+                document.querySelector(".text-wrapper-7").textContent = "STOP";
+                startTracking();
+            } else {
+                document.querySelector(".text-wrapper-7").textContent = "TRACK !";
+                stopTracking();
+            }
+        });
+
+        document.querySelector(".reset-workout").addEventListener("click", () => {
+            stopTracking();
+            isTracking = false;
+            document.querySelector(".text-wrapper-7").textContent = "TRACK !";
+            totalDistance = 0;
+            startTime = null;
+            lastCoords = null;
+
+            document.getElementById("timeTrack").textContent = "-:--:--";
+            document.getElementById("distance").textContent = "----";
+            document.getElementById("pace").textContent = "--:--";
+            document.getElementById("speed").textContent = "----";
+        });
+    </script>
+    
+    <!-- A button that gives tips in random order -->
+    <script>
+      /* A few sample tips—replace or extend with your own */
+      const tips = [
+        "Stay hydrated: sip water every 15 minutes.",
+        "Maintain good posture to reduce injury risk.",
+        "Warm-up for 5 minutes before intense exercise.",
+        "Don't forget to stretch your calves after jogging.",
+        "Listen to your body — pain is a signal, not a challenge."
+      ];
+    
+      // Helper to pick a random item
+      function randomTip(arr) {
+        return arr[Math.floor(Math.random() * arr.length)];
+      }
+    
+      // Attach one click listener when the DOM is ready
+      document.addEventListener("DOMContentLoaded", () => {
+        const btn = document.getElementById("tip-button");
+        if (btn) {
+          btn.addEventListener("click", () => {
+            alert(randomTip(tips));
+          });
+        }
+      });
+    </script>
+
+</body>
+</html>

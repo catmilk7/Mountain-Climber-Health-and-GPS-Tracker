@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mountain Climber Safety System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css')}}" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Quicksand:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+<main class="login-page">
+  {% include 'navbar.html' %}
+    <div class="page-container">
+      <img src="{{ url_for('static', filename='img/loginBackground.png') }}"
+      alt="Background" 
+      class="background-image" 
+      />
+      
+      <section class="login-container">
+        <div class="login-content">
+          <div class="image-column">
+            <img src="{{ url_for('static', filename='img/loginFrontGround.png') }}" alt="Login illustration" class="login-image" />
+          </div>
+          <div class="form-column">
+            <form method="POST">
+              <div class="form-container">     
+                <h1 class="welcome-title">Welcome Back!</h1>
+                <input type="email" name="email" id="email" placeholder="Email" class="input-field email-input" />
+                <input type="password" name="password" id="password" placeholder="Password" class="input-field password-input" />
+                <button type="submit" class="submit-button">Enter</button>
+                <a href="/forgot_password" class="forgot-password">Forget password?</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  

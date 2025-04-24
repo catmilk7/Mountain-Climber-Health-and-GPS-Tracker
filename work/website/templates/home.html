@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mountain Climber Safety System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css')}}" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Quicksand:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="page-wrapper">
+      {% include 'navbar.html' %}
+      <div class="content-container">
+
+
+        <section class="hero-section">
+          <div class="hero-content">
+            <h1 class="hero-title">
+              Stay Safe While Climbing with Smart Technology
+            </h1>
+            <p class="hero-description">
+              Our innovative mountain climber health and GPS tracking system
+              ensures your safety on every ascent. With real-time health
+              monitoring and emergency alerts, you can focus on reaching new
+              heights.
+            </p>
+          </div>
+          <!--làm 2 colummn cho ảnh ở đầu-->
+          <div class="image-gallery">
+            <div class="gallery-grid">
+              <div class="gallery-column">
+                <div class="gallery-images">
+                  <img
+                    src="{{ url_for('static', filename='img/Mountain.png') }}"
+                    alt="Gallery image 1"
+                    class="gallery-img"
+                  />
+                  <img
+                    src="{{ url_for('static', filename='img/GoatGrass.png') }}"
+                    alt="Gallery image 2"
+                    class="gallery-img"
+                  />
+                  <img
+                    src="{{ url_for('static', filename='img/4Climber.png') }}"
+                    alt="Gallery image 3"
+                    class="gallery-img"
+                  />
+                </div>
+              </div>
+              <div class="gallery-column-2">
+                <div class="gallery-images-2">
+                  <img
+                    src="{{ url_for('static', filename='img/Climber.png') }}"
+                    alt="Gallery image 4"
+                    class="gallery-img"
+                  />
+                  <img
+                    src="{{ url_for('static', filename='img/Forest.png') }}"
+                    alt="Gallery image 5"
+                    class="gallery-img"
+                  />
+                  <img
+                  src="{{ url_for('static', filename='img/TopMountain.png') }}"
+                  alt="Gallery image 6"
+                  class="gallery-img"
+                />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="features-section">
+          <h2 class="section-title">
+            How Our System Enhances Your Climbing Experience
+          </h2>
+          <p class="section-subtitle">
+            Our innovative system prioritizes your health and safety while
+            climbing.
+          </p>
+          <div class="features-grid">
+            <article class="feature-card">
+              <img
+                src="{{ url_for('static', filename='icon/Health.png') }}"
+                alt="Health"
+                class="feature-icon"
+              />
+              <h3 class="feature-title">
+                Store Health Information and Detect Vital Signs
+              </h3>
+              <p class="feature-description">
+                Easily store your health data and monitor vital signs like
+                temperature and heart rate
+              </p>
+            </article>
+            <article class="feature-card">
+              <img
+                src="{{ url_for('static', filename='icon/Location.png') }}"
+                alt="Location"
+                class="feature-icon"
+              />
+              <h3 class="feature-title">
+                Real-time Location Sharing with Rescue Team
+              </h3>
+              <p class="feature-description">
+                Share your exact location instantly for faster emergency
+                response
+              </p>
+            </article>
+            <article class="feature-card">
+              <img
+                src="{{ url_for('static', filename='icon/Dashboard.png') }}"
+                alt="Dashboard"
+                class="feature-icon"
+              />
+              <h3 class="feature-title">
+                User Dashboard for Route and Health Data
+              </h3>
+              <p class="feature-description">
+                Access your climbing route and health metrics at a glance
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="emergency-section">
+          <img
+            src="{{ url_for('static', filename='img/Emergency.png') }}"
+            alt="Emergency"
+            class="emergency-img"
+          />
+          <div class="emergency-content">
+            <h2 class="section-title">
+              Instantly Connect with Medical Teams in Emergencies
+            </h2>
+            <p class="hero-description">
+              Our emergency button ensures your health data is sent directly to
+              your doctor and rescue team. With just one click, help is on the
+              way!
+            </p>
+            <div class="emergency-features">
+              <article class="emergency-card">
+                <img
+                  src="{{ url_for('static', filename='icon/Alert.png') }}"
+                  alt="Alert"
+                  class="emergency-icon"
+                />
+                <h3 class="emergency-card-title">Real-Time Alerts</h3>
+                <p class="emergency-card-description">
+                  Receive immediate notifications if your health metrics
+                  indicate a need for assistance
+                </p>
+              </article>
+              <article class="emergency-card">
+                <img
+                  src="{{ url_for('static', filename='icon/Safety.png') }}"
+                  alt="Safety"
+                  class="emergency-icon"
+                />
+                <h3 class="emergency-card-title">Stay Safe</h3>
+                <p class="emergency-card-description">
+                  Your safety is priority, ensuring timely medical support when
+                  you need it
+                </p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="location-section">
+          <div class="location-content">
+            <div class="location-header">
+              <h2 class="section-title">
+                Real-Time Location Tracking for Safety
+              </h2>
+              <div class="location-buttons">
+              </div>
+            </div>
+            <p class="location-description">
+              Real-time location tracking feature ensures that your exact
+              position is always know. In the event of an emergency, this allows
+              rescue and medical teams to reach you faster, potentially saving
+              lives. With just a click, you can share your location, making your
+              mountain climbing experience safer and more secure
+            </p>
+          </div>
+          <img
+            src="{{ url_for('static', filename='img/LocationTracking.png') }}"
+            alt="Location Tracking"
+            class="location-img"
+          />
+        </section>
+
+        <section class="dashboard-section">
+          <div class="dashboard-content">
+            <h2 class="section-title">Your Health and Journey at a Glance</h2>
+            <p class="hero-description">
+              Stay informed about your health and progress with our intuitive
+              dashboard. Easily track your route, distance, and vital health
+              data.
+            </p>
+            <div class="dashboard-features">
+              <article class="dashboard-card">
+                <h3 class="dashboard-card-title">Route Tracking</h3>
+                <p class="dashboard-card-description">
+                  Monitor your journey and ensure you stay on the right path
+                </p>
+              </article>
+              <article class="dashboard-card">
+                <h3 class="dashboard-card-title">Health Insights</h3>
+                <p class="dashboard-card-description">
+                  Access real-time health data to keep you safe and informed
+                </p>
+              </article>
+            </div>
+          </div>
+          <img
+            src="{{ url_for('static', filename='img/Dashboard.png') }}"
+            alt="Dashboard"
+            class="dashboard-img"
+          />
+        </section>
+      </div>
+      <section class="cta-section">
+        <img
+          src="{{ url_for('static', filename='img/MountainBackground.png') }}"
+          alt="Mountain Background"
+          class="cta-bg"
+        />
+        <div class="cta-content">
+          <h2 class="cta-title">Be Prepared For The Mountains And Beyond!</h2>
+          <p class="cta-description">
+            Join us to enhance your climbing experience with real-time health
+            monitoring and GPS tracking
+          </p>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

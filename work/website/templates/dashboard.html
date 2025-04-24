@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IoT Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        body {
+            background-color: #eeeae2;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .sos-wrapper {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto;
+        }
+
+        .sos-button {
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 130px;
+            height: 130px;
+            font-size: 28px;
+            z-index: 2;
+            position: relative;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.6);
+        }
+
+        .pulse {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 130px;
+            height: 130px;
+            background-color: rgba(255, 0, 0, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(1);
+            animation: pulseAnim 2s infinite ease-out;
+            z-index: 1;
+        }
+
+            .pulse.delay-1 {
+                animation-delay: 0.6s;
+            }
+
+            .pulse.delay-2 {
+                animation-delay: 1.2s;
+            }
+
+        .sos-button:active {
+            transform: scale(0.92);
+            box-shadow: 0 0 40px rgba(255, 0, 0, 1), 0 0 80px rgba(255, 0, 0, 0.6);
+            transition: all 0.1s ease;
+        }
+
+
+        @keyframes pulseAnim {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.6;
+            }
+
+            70% {
+                transform: translate(-50%, -50%) scale(4);
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">📡 IoT Dashboard</h1>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <div class="container my-4">
+            <div class="row">
+                <!-- Left Column -->
+                <div class="col-md-4 d-flex flex-column gap-4">
+                    <!-- Temperature Card -->
+                    <div class="card shadow rounded-4 p-4 text-center">
+                        <h6 class="fw-bold mb-3">
+                            <i class="fa-solid fa-temperature-half me-2"></i> Temperature
+                        </h6>
+                        <h1 class="display-5 fw-bold">
+                            <span id="temperature-value">{{ '%.2f' | format(temperature) }}</span><span class="fs-4">°C</span>
+                        </h1>
+                    </div>
+
+                    <!-- Emergency Card -->
+                    <div class="card shadow rounded-4 p-4 text-center">
+                        <div class="mb-3">
+                            <h5 class="fw-bold mb-2">
+                                <i class="fa-solid fa-triangle-exclamation"></i> Are You In Emergency?
+                            </h5>
+                            <p class="text-muted">Press the button below, help will reach you soon</p>
+                        </div>
+                        <form method="POST" action="/trigger-emergency">
+                            <div class="sos-wrapper">
+                                <button type="submit" class="sos-button fw-bold">SOS</button>
+                                <span class="pulse"></span>
+                                <span class="pulse delay-1"></span>
+                                <span class="pulse delay-2"></span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="col-md-8 d-flex">
+                    <div class="card shadow rounded-4 p-4 full-height w-100">
+                        <h5 class="fw-bold mb-3">
+                            <i class="fa-solid fa-location-dot me-2"></i> Location
+                        </h5>
+                        <div id="map" style="height: 300px;" class="rounded-4 overflow-hidden"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script>
+        function updateDashboard() {
+            fetch('/api/status')
+                .then(response => response.json())
+                .then(data => {
+                    // Cập nhật nhiệt độ
+                    document.getElementById("temperature-value").innerText = data.temperature.toFixed(2);
+
+                    // Cập nhật bản đồ (chỉ nếu tọa độ thay đổi)
+                    if (window.currentLat !== data.lat || window.currentLon !== data.lon) {
+                        window.currentLat = data.lat;
+                        window.currentLon = data.lon;
+
+                        map.setView([data.lat, data.lon], 15);
+                        marker.setLatLng([data.lat, data.lon]);
+                    }
+                })
+                .catch(err => {
+                    console.error("Lỗi khi lấy dữ liệu cập nhật:", err);
+                });
+        }
+
+        // Khởi tạo biến bản đồ toàn cục
+        let map = L.map('map').setView([{{ lat }}, {{ lon }}], 15);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+        let marker = L.marker([{{ lat }}, {{ lon }}]).addTo(map).bindPopup("User location").openPopup();
+
+        // Lưu vị trí hiện tại
+        window.currentLat = {{ lat }};
+        window.currentLon = {{ lon }};
+
+        // Gọi cập nhật mỗi 5 giây
+        setInterval(updateDashboard, 5000);
+    </script>
+</body>
+</html>
